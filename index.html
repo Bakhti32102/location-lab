@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Location Lab</title>
+</head>
+<body>
+  <h2>Location Lab - Practice</h2>
+  <p>Apni location check karne ke liye button dabayein.</p>
+  <button onclick="getLocation()">Check My Location</button>
+  <p id="status">Location abhi check nahi hui.</p>
+
+  <script>
+    function getLocation() {
+      const status = document.getElementById("status");
+
+      if (!navigator.geolocation) {
+        status.textContent = "Browser location API support nahi karta.";
+        return;
+      }
+
+      status.textContent = "Permission ka intezar hai...";
+
+      navigator.geolocation.getCurrentPosition(
+        function(position) {
+          status.textContent =
+            "Latitude: " + position.coords.latitude +
+            " | Longitude: " + position.coords.longitude;
+        },
+        function(error) {
+          status.textContent = "Location access nahi hua: " + error.message;
+        }
+      );
+    }
+  </script>
+</body>
+</html>
